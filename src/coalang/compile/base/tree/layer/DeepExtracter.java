@@ -21,7 +21,7 @@ public class DeepExtracter extends Extracter{
 	@Override
 	protected boolean onFeed(TreeItem treeItem) {
 		if(treeItem.getType() == TreeItemType.TOKEN){
-			state.feed(treeItem.getTokens().get(0).getType());
+			state.feed(treeItem.getTokens().at(0).getType());
 			return state.isFinished();
 		}else if(treeItem.getType().isDeep()){
 			treeItem.setAll(new DeepExtracter(type, open, close).call(treeItem.asList()));
@@ -32,14 +32,14 @@ public class DeepExtracter extends Extracter{
 	@Override
 	protected boolean isOpener(TreeItem treeItem) {
 		if(treeItem.getType() == TreeItemType.TOKEN){
-			return treeItem.getTokens().get(0).getType() == open;
+			return treeItem.getTokens().at(0).getType() == open;
 		}
 		return false;
 	}
 
 	@Override
 	protected void open(TreeItem treeItem) {
-		state.feed(treeItem.getTokens().get(0).getType());
+		state.feed(treeItem.getTokens().at(0).getType());
 		if(state.isFinished()){
 			treeItem.makeException("Implementation Exception: state is finish after opening.");
 		}

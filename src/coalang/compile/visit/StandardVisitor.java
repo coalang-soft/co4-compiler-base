@@ -31,7 +31,11 @@ public class StandardVisitor implements Func<Pair<TreeItem, CompileContext>, Str
 		
 		DetectResult r = Detect.handle(context, current, false);
 		if(r.isCompiled()){
-			builder.append(r.compiled());
+			String compiled = r.compiled();
+			builder.append(compiled);
+			if(!compiled.isEmpty()){
+				builder.append("\n");
+			}
 			current.clear();
 		}
 	}

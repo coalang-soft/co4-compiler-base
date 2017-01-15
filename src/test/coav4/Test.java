@@ -13,26 +13,13 @@ import coalang.compile.base.read.TokenizeException;
 import coalang.compile.base.read.Tokenizer;
 import coalang.compile.base.token.TokenGroup;
 import coalang.compile.base.tree.Tree;
-import coalang.compile.systems.ControlBlockSystem;
+import coalang.compile.systems.DotSystem;
+import coalang.compile.systems.NameLoadSystem;
 import coalang.compile.visit.StandardVisitor;
 
 public class Test {
 	
 	public static void main(String[] args) throws FileNotFoundException, TokenizeException {
-		
-		BaseSequence<TokenType> s = BaseSequence.makeSequence(
-			new Func<Integer, TokenType[]>() {
-
-				public TokenType[] call(Integer p) {
-					return new TokenType[p];
-				}
-				
-			},
-			
-			TokenType.ROUND_BRACKET_OPEN, TokenType.NAME, TokenType.ROUND_BRACKET_CLOSE
-		);
-		
-		System.out.println(s.subSequence(0).at(0));
 		
 		Tokenizer t = new Tokenizer();
 		t.stream(new FileInputStream(new File("test.txt")), "test.txt");
@@ -41,7 +28,8 @@ public class Test {
 		Tree tree = new Tree(tokens);
 		
 		CompileContext c = new CompileContext();
-		c.addCompileSystem(new ControlBlockSystem());
+		c.addCompileSystem(new NameLoadSystem());
+		c.addCompileSystem(new DotSystem());
 		
 		System.out.println(tree.createTree().visit(c, new StandardVisitor()));
 		
