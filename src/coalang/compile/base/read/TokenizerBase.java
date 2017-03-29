@@ -1,11 +1,10 @@
 package coalang.compile.base.read;
 
 import io.github.coalangsoft.lang.token.Token;
+import io.github.coalangsoft.lang.token.TokenGroup;
 import io.github.coalangsoft.lang.token.TokenType;
 
 import java.util.ArrayList;
-
-import coalang.compile.base.token.TokenGroup;
 
 public class TokenizerBase {
 	

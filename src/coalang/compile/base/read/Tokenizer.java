@@ -1,9 +1,9 @@
 package coalang.compile.base.read;
 
+import io.github.coalangsoft.lang.token.TokenGroup;
+
 import java.io.IOException;
 import java.io.InputStream;
-
-import coalang.compile.base.token.TokenGroup;
 
 public class Tokenizer {
 	
